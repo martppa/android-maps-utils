@@ -227,6 +227,10 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
         return squareTextView;
     }
 
+    protected int getColor(@NonNull Cluster<T> cluster) {
+        return getColor(getBucket(cluster));
+    }
+
     protected int getColor(int clusterSize) {
         final float hueRange = 220;
         final float sizeRange = 300;
@@ -939,7 +943,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
         int bucket = getBucket(cluster);
         BitmapDescriptor descriptor = mIcons.get(bucket);
         if (descriptor == null) {
-            mColoredCircleBackground.getPaint().setColor(getColor(bucket));
+            mColoredCircleBackground.getPaint().setColor(getColor(cluster));
             descriptor = BitmapDescriptorFactory.fromBitmap(mIconGenerator.makeIcon(getClusterText(bucket)));
             mIcons.put(bucket, descriptor);
         }
