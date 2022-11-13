@@ -941,11 +941,11 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
     @NonNull
     protected BitmapDescriptor getDescriptorForCluster(@NonNull Cluster<T> cluster) {
         int bucket = getBucket(cluster);
-        BitmapDescriptor descriptor = mIcons.get(bucket);
+        BitmapDescriptor descriptor = mIcons.get(cluster.hashCode());
         if (descriptor == null) {
             mColoredCircleBackground.getPaint().setColor(getColor(cluster));
             descriptor = BitmapDescriptorFactory.fromBitmap(mIconGenerator.makeIcon(getClusterText(bucket)));
-            mIcons.put(bucket, descriptor);
+            mIcons.put(cluster.hashCode(), descriptor);
         }
         return descriptor;
     }
